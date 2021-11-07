@@ -1,4 +1,8 @@
 ## ---- include = FALSE---------------------------------------------------------
+#> Save the user's options and parameters
+oldpar = par()
+
+## ---- include = FALSE---------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -11,22 +15,13 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 knitr::opts_knit$set(global.par = TRUE)
-r = getOption("repos")
-r["CRAN"] = "http://cran.us.r-project.org"
-options(repos = r)
 
 ## ---- include = FALSE---------------------------------------------------------
-#> Save the user's options and parameters...
-#> ... and set new ones for this vignette.
-oldopt = options()
-oldpar = par()
+#> Set new parameters for this vignette.
 par(mfrow = c(1, 1), mar = c(4.5, 4.5, 0.3, 0.3))
 
-## -----------------------------------------------------------------------------
-if (!require("devtools")) install.packages("devtools")
-devtools::install_github("davidbajnai/isogeochem")
-
-## -----------------------------------------------------------------------------
+## ---- include = TRUE, message = FALSE, eval = TRUE----------------------------
+if (!require("isogeochem")) install.packages("isogeochem")
 library("isogeochem")
 
 ## -----------------------------------------------------------------------------
@@ -136,5 +131,4 @@ lines(DH_age, DH_d18O_gw, lwd = 2, col = "gray10")
 ## ---- include = FALSE---------------------------------------------------------
 #> Reset to the user's options and parameters.
 par(oldpar)
-options(oldopt)
 

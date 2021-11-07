@@ -1,7 +1,7 @@
 Package: isogeochem
 Type: Package
 Title: Tools for Carbonate Isotope Geochemistry
-Version: 1.0.8.3
+Version: 1.0.9
 Authors@R: 
     c(person(given = "David", family = "Bajnai",
     email = "david.bajnai@uni-goettingen.de",
@@ -25,12 +25,12 @@ Suggests: shades, viridisLite, knitr, rmarkdown, devtools, spelling,
         testthat (>= 3.0.0), covr
 VignetteBuilder: knitr
 Imports: stats, graphics, grDevices
-Depends: R (>= 2.10)
+Depends: R (>= 3.1.0)
 Language: en-US
 NeedsCompilation: no
-Packaged: 2021-11-02 12:13:37 UTC; bajnaidavid
+Packaged: 2021-11-07 15:16:35 UTC; bajnaidavid
 Author: David Bajnai [aut, cre] (<https://orcid.org/0000-0002-4053-5056>),
   Julian Tödter [ctb]
 Maintainer: David Bajnai <david.bajnai@uni-goettingen.de>
 Repository: CRAN
-Date/Publication: 2021-11-03 19:50:05 UTC
+Date/Publication: 2021-11-07 15:50:06 UTC
