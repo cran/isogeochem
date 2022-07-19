@@ -7,7 +7,8 @@
 #' CO2 produced from acid digestion and carbonate.
 #'
 #' @param temp Acid digestion temperature (°C).
-#' @param min Mineralogy. Options are `"calcite"` and `"aragonite"`.
+#' @param min Mineralogy. Options are `"calcite"`, `"aragonite"`,
+#' and `"dolomite"`.
 #'
 #' @details
 #'
@@ -21,6 +22,11 @@
 #' \deqn{\alpha^{18}_{CO2acid/aragonite} =
 #' e^{(3.39 \times \frac{1}{T} - 0.00083)}}
 #'
+#' **dolomite** (Rosenbaum & Sheppard 1986):
+#'
+#' \deqn{\alpha^{18}_{CO2acid/dolomite} =
+#' e^{(665 \times \frac{1}{T^{2}} + 0.00423)}}
+#'
 #' @return
 #' Returns the 18O/16O fractionation factor.
 #'
@@ -30,9 +36,15 @@
 #' Geochimica et Cosmochimica Acta, 29(12), 1347-1353.
 #' \doi{10.1016/0016-7037(65)90011-6}
 #'
+#' Rosenbaum, J. and Sheppard, S.M.F. (1986).
+#' An isotopic study of siderites, dolomites and ankerites
+#' at high temperatures.
+#' Geochimica et Cosmochimica Acta, 50, 1147-1150.
+#' \doi{10.1016/0016-7037(86)90396-0}
+#'
 #' Kim, S.-T., Mucci, A., and Taylor, B. E. (2007).
 #' Phosphoric acid fractionation factors for calcite and aragonite
-#' between 25 and 75 °C: Revisited.
+#' between 25 and 75 °C: Revisited.
 #' Chemical Geology, 246(3-4), 135-146.
 #' \doi{10.1016/j.chemgeo.2007.08.005}
 #'
@@ -56,8 +68,11 @@ a18_CO2acid_c = function(temp, min) {
     exp((3.48 * 1000 / TinK - 1.47) / 1000)
   } else if (min == "aragonite") {
     exp((3.39 * 1000 / TinK - 0.83) / 1000)
+  } else if (min == "dolomite") {
+    exp( (6.65 * 10 ^ 5 / TinK ^ 2 + 4.23) / 1000)
   } else {
-    stop("Invalid input for min")
+    stop("Invalid input for min. Options are calcite, aragonite,
+         and dolomite.")
   }
 }
 
@@ -98,7 +113,7 @@ a18_H2O_OH = function(temp, eq) {
   } else if (eq == "Z20-MP2") {
     e18_H2O_OH = (-4.0771 + (9.8350 * 10^3) / TinK + (-0.8729 * 10^6) / TinK^2)
   } else {
-    stop("Invalid input for eq")
+    stop("Invalid input for eq. Options are Z20-X3LYP and Z20-MP2.")
   }
   e18_H2O_OH / 1000 + 1
 }

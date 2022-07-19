@@ -90,6 +90,11 @@
 #' \deqn{\alpha^{18}_{dolomite/water} =
 #' e^{(2.73 \times \frac{1000}{T^{2}} + 0.00026)}}
 #'
+#' `"Muller19"`: Müller et al. (2019):
+#'
+#' \deqn{\alpha^{18}_{dolomite/water} =
+#' e^{(2.9923 \times \frac{1000}{T^{2}} + 0.0023592)}}
+#'
 #' @return
 #' Returns the 18O/16O fractionation factor.
 #'
@@ -126,11 +131,11 @@
 #'
 #' Kim, S.-T., Mucci, A., & Taylor, B. E. (2007).
 #' Phosphoric acid fractionation factors for calcite and aragonite between
-#' 25 and 75 °C: Revisited. Chemical Geology, 246(3-4), 135-146.
+#' 25 and 75 °C: Revisited. Chemical Geology, 246(3-4), 135-146.
 #' \doi{10.1016/j.chemgeo.2007.08.005}
 #'
 #' Coplen, T. B. (2007).
-#' Calibration of the calcite–water oxygen-isotope geothermometer
+#' Calibration of the calcite-water oxygen-isotope geothermometer
 #' at Devils Hole, Nevada, a natural laboratory.
 #' Geochimica et Cosmochimica Acta, 71(16), 3948-3957.
 #' \doi{10.1016/j.gca.2007.05.028}
@@ -139,7 +144,7 @@
 #' Amiot, R., et al. (2010).
 #' Oxygen isotope fractionation between apatite-bound carbonate
 #' and water determined from controlled experiments with synthetic
-#' apatites precipitated at 10–37°C.
+#' apatites precipitated at 10-37°C.
 #' Geochimica et Cosmochimica Acta, 74(7), 2072-2081.
 #' \doi{10.1016/j.gca.2009.12.024}
 #'
@@ -168,11 +173,19 @@
 #' Nature Communications, 10, 429.
 #' \doi{10.1038/s41467-019-08336-5}
 #'
+#' Müller, I.A., Rodriguez-Blanco, J.D., Storck, J.-C., do Nascimento, G.S.,
+#' Bontognali, T.R.R., Vasconcelos, C.,
+#' Benning, L.G. & Bernasconi, S.M. (2019).
+#' Calibration of the oxygen and clumped isotope thermometers for
+#' (proto-)dolomite based on synthetic and natural carbonates.
+#' Chemical Geology, 525, 1-17.
+#' \doi{10.1016/j.chemgeo.2019.07.014}
+#'
 #' @family fractionation_factors
 #'
 #' @examples
 #' a18_c_H2O(temp = 25, min = "calcite", eq = "Coplen07")
-#' a18_c_H2O(temp = 25, min = "aragonite", "GK86")
+#' a18_c_H2O(temp = 25, min = "aragonite", eq = "GK86")
 #'
 #' @export
 
@@ -186,22 +199,23 @@ a18_c_H2O = function(temp, min, eq) {
       # Coplen (2007)
       exp((17.4 * 1000 / TinK - 28.6) / 1000)
     } else if (eq == "KO97-orig") {
-      # Kim and O'Neil (1997) –– original
+      # Kim and O'Neil (1997) -- original
       exp((18.03 * 1000 / TinK - 32.42) / 1000)
     } else if (eq == "KO97") {
-      # Kim and O'Neil (1997) –– reprocessed
+      # Kim and O'Neil (1997) -- reprocessed
       exp((18.04 * 1000 / TinK - 32.18) / 1000)
     } else if (eq == "Watkins13") {
       # Watkins et al. (2013)
       exp((17.747 * 1000 / TinK - 29.777) / 1000)
-    } else if (eq == "ONeil69" | eq == "FO77" ) {
+    } else if (eq == "ONeil69" | eq == "FO77") {
       # O'Neil et al. (1969) modified by Friedman and O'Neil (1977)
       exp((2.78 * 10 ^ 6 / TinK ^ 2 - 2.89) / 1000)
     } else if (eq == "Tremaine11") {
       # Tremaine et al. (2011)
       exp((16.1 * 1000 / TinK - 24.6) / 1000)
     } else {
-      stop("Invalid input for eq")
+      stop("Invalid input for eq. Options for calcite are Daeron19,
+           Coplen07, KO97-orig, KO97, Watkins13, ONeil69, and Tremaine11.")
     }
   } else if (min == "aragonite") {
     if (eq == "GK86")  {
@@ -211,30 +225,36 @@ a18_c_H2O = function(temp, min, eq) {
       # Kim et al. (2007)
       exp((17.880 * 1000 / TinK - 31.14) / 1000)
     } else {
-      stop("Invalid input for eq")
+      stop("Invalid input for eq. Options for aragonite are GK86
+           and Kim07.")
     }
   } else if (min == "apatite") {
     if (eq == "Lecuyer10")  {
       # Lécuyer et al. (2010)
       exp((25.19 * 1000 / TinK  - 56.47) / 1000)
     } else {
-      stop("Invalid input for eq")
+      stop("Invalid input for eq. Use Lecuyer10 for apatite.")
     }
   } else if (min == "siderite") {
     if (eq == "vanDijk18")  {
       # van Dijk et al. (2018)
       exp((19.67 * 1000 / TinK  - 36.27) / 1000)
     } else {
-      stop("Invalid input for eq")
+      stop("Invalid input for eq. Use vanDijk18 for siderite.")
     }
   } else if (min == "dolomite") {
     if (eq == "Vasconcelos05")  {
       # Vasconcelos et al. (2005)
       exp((2.73 * 10 ^ 6 / TinK ^ 2 + 0.26) / 1000)
+    } else if (eq == "Muller19")  {
+      # Müller et al. (2019)
+      exp((2.9923 * 10 ^ 6 / TinK ^ 2 - 2.3592) / 1000)
     } else {
-      stop("Invalid input for eq")
+      stop("Invalid input for eq. Options for dolomite are Vasconcelos05
+           and Muller19.")
     }
   } else {
-    stop("Invalid input for min")
+    stop("Invalid input for min. Options are calcite, aragonite, siderite,
+         and dolomite.")
   }
 }

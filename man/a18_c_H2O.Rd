@@ -96,10 +96,15 @@ Options for eq if min = \code{"dolomite"}:
 
 \deqn{\alpha^{18}_{dolomite/water} =
 e^{(2.73 \times \frac{1000}{T^{2}} + 0.00026)}}
+
+\code{"Muller19"}: Müller et al. (2019):
+
+\deqn{\alpha^{18}_{dolomite/water} =
+e^{(2.9923 \times \frac{1000}{T^{2}} + 0.0023592)}}
 }
 \examples{
 a18_c_H2O(temp = 25, min = "calcite", eq = "Coplen07")
-a18_c_H2O(temp = 25, min = "aragonite", "GK86")
+a18_c_H2O(temp = 25, min = "aragonite", eq = "GK86")
 
 }
 \references{
@@ -135,11 +140,11 @@ Geology, 33(4), 317-320.
 
 Kim, S.-T., Mucci, A., & Taylor, B. E. (2007).
 Phosphoric acid fractionation factors for calcite and aragonite between
-25 and 75 °C: Revisited. Chemical Geology, 246(3-4), 135-146.
+25 and 75 °C: Revisited. Chemical Geology, 246(3-4), 135-146.
 \doi{10.1016/j.chemgeo.2007.08.005}
 
 Coplen, T. B. (2007).
-Calibration of the calcite–water oxygen-isotope geothermometer
+Calibration of the calcite-water oxygen-isotope geothermometer
 at Devils Hole, Nevada, a natural laboratory.
 Geochimica et Cosmochimica Acta, 71(16), 3948-3957.
 \doi{10.1016/j.gca.2007.05.028}
@@ -148,7 +153,7 @@ Lécuyer, C., Balter, V., Martineau, F., Fourel, F., Bernard, A.,
 Amiot, R., et al. (2010).
 Oxygen isotope fractionation between apatite-bound carbonate
 and water determined from controlled experiments with synthetic
-apatites precipitated at 10–37°C.
+apatites precipitated at 10-37°C.
 Geochimica et Cosmochimica Acta, 74(7), 2072-2081.
 \doi{10.1016/j.gca.2009.12.024}
 
@@ -176,6 +181,14 @@ Coplen, T. B., et al. (2019).
 Most Earth-surface calcites precipitate out of isotopic equilibrium.
 Nature Communications, 10, 429.
 \doi{10.1038/s41467-019-08336-5}
+
+Müller, I.A., Rodriguez-Blanco, J.D., Storck, J.-C., do Nascimento, G.S.,
+Bontognali, T.R.R., Vasconcelos, C.,
+Benning, L.G. & Bernasconi, S.M. (2019).
+Calibration of the oxygen and clumped isotope thermometers for
+(proto-)dolomite based on synthetic and natural carbonates.
+Chemical Geology, 525, 1-17.
+\doi{10.1016/j.chemgeo.2019.07.014}
 }
 \seealso{
 Other fractionation_factors: 

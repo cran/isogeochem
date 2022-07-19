@@ -3,25 +3,25 @@
 
 # ----- Test warnings -----
 
-test_that("a18_c_H2O errors if eq is not or wrongly specified", {
-  expect_error(a18_c_H2O(10, "calcite", "cheese"), "Invalid input for eq")
-  expect_error(a18_c_H2O(10, "dolomite", "cheese"), "Invalid input for eq")
-  expect_error(a18_c_H2O(10, "aragonite", "cheese"), "Invalid input for eq")
-  expect_error(a18_c_H2O(10, "siderite", "cheese"), "Invalid input for eq")
-  expect_error(a18_c_H2O(10, "apatite", "cheese"), "Invalid input for eq")
+test_that("a18_c_H2O errors if eq is wrongly specified", {
+  expect_error(a18_c_H2O(10, "calcite", "cheese"))
+  expect_error(a18_c_H2O(10, "dolomite", "cheese"))
+  expect_error(a18_c_H2O(10, "aragonite", "cheese"))
+  expect_error(a18_c_H2O(10, "siderite", "cheese"))
+  expect_error(a18_c_H2O(10, "apatite", "cheese"))
 })
 
-test_that("a18_c_H2O errors if parameters are not or wrongly specified", {
-  expect_error(a18_c_H2O(10, "cheese", eq = "Daeron19"), "Invalid input for min")
+test_that("a18_c_H2O errors if min is wrongly specified", {
+  expect_error(a18_c_H2O(10, "cheese", eq = "Daeron19"))
 })
 
 
 test_that("a18_CO2acid_c errors if parameters are not or wrongly specified", {
-  expect_error(a18_CO2acid_c(10, min = "cheese"), "Invalid input for min")
+  expect_error(a18_CO2acid_c(10, min = "cheese"))
 })
 
 test_that("a18_H2O_OH errors if parameters are not or wrongly specified", {
-  expect_error(a18_H2O_OH(10, eq = "cheese"), "Invalid input for eq")
+  expect_error(a18_H2O_OH(10, eq = "cheese"))
 })
 
 
@@ -46,12 +46,14 @@ test_that("a18_c_H2O produces accurate values", {
   expect_equal(elena(a18_c_H2O(25, min = "aragonite", eq = "Kim07")), 28.8)
   expect_equal(elena(a18_c_H2O(25, min = "apatite", eq = "Lecuyer10")), 28.0)
   expect_equal(elena(a18_c_H2O(25, min = "dolomite", eq = "Vasconcelos05")), 31.0)
+  expect_equal(elena(a18_c_H2O(25, min = "dolomite", eq = "Muller19")), 31.3)
   expect_equal(elena(a18_c_H2O(25, min = "siderite", eq = "vanDijk18")), 29.7)
 })
 
 test_that("a18_CO2acid_c produces accurate values", {
   expect_equal(elena(a18_CO2acid_c(temp = 90, min = "calcite")), 8.1)
   expect_equal(elena(a18_CO2acid_c(temp = 90, min = "aragonite")), 8.5)
+  expect_equal(elena(a18_CO2acid_c(temp = 90, min = "dolomite")), 9.3)
 })
 
 test_that("a18_CO2g_H2O produce accurate values", {
