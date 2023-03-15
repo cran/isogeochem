@@ -18,7 +18,7 @@ knitr::opts_knit$set(global.par = TRUE)
 
 ## ---- include = FALSE---------------------------------------------------------
 #> Set new parameters for this vignette.
-par(mfrow = c(1, 1), mar = c(4.5, 4.5, 0.3, 0.3))
+par(mfrow = c(1, 1), mar = c(4.5, 4.5, 0.3, 0.3), bg = "white")
 
 ## ---- include = TRUE, message = FALSE, eval = TRUE----------------------------
 if (!require("isogeochem")) install.packages("isogeochem")
